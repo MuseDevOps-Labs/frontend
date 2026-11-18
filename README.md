@@ -3,6 +3,7 @@
 React 18 frontend for the Zen Pharma platform. Served via Nginx inside a Docker container and deployed to AWS EKS via GitOps (ArgoCD).
 
 > **Companion repos:**
+>
 > - [`zen-infra`](https://github.com/your-github-username/zen-infra) — Terraform for AWS infrastructure (EKS, RDS, ECR, IAM)
 > - [`zen-pharma-backend`](https://github.com/your-github-username/zen-pharma-backend) — Spring Boot microservices
 > - [`zen-gitops`](https://github.com/your-github-username/zen-gitops) — ArgoCD apps + Helm values
@@ -11,18 +12,18 @@ React 18 frontend for the Zen Pharma platform. Served via Nginx inside a Docker 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | React 18 |
-| Build tool | Create React App / npm |
-| Web server | Nginx (serves static build) |
-| Container | Docker (multi-stage: node:20-alpine build → nginx:alpine) |
-| Code quality | ESLint + Prettier |
-| Testing | Jest + React Testing Library |
-| Static analysis | CodeQL + Semgrep |
-| SCA | `npm audit` |
-| Image scan | Trivy |
-| Image signing | Cosign (keyless) |
+| Layer           | Technology                                                |
+| --------------- | --------------------------------------------------------- |
+| Framework       | React 18                                                  |
+| Build tool      | Create React App / npm                                    |
+| Web server      | Nginx (serves static build)                               |
+| Container       | Docker (multi-stage: node:20-alpine build → nginx:alpine) |
+| Code quality    | ESLint + Prettier                                         |
+| Testing         | Jest + React Testing Library                              |
+| Static analysis | CodeQL + Semgrep                                          |
+| SCA             | `npm audit`                                               |
+| Image scan      | Trivy                                                     |
+| Image signing   | Cosign (keyless)                                          |
 
 ---
 
@@ -50,6 +51,7 @@ zen-pharma-frontend/
 ## Local Development
 
 ### Prerequisites
+
 - Node.js 20+
 - npm 9+
 
@@ -94,11 +96,11 @@ docker run -p 80:80 pharma-ui:local
 
 ### Environment variables (runtime via ConfigMap)
 
-| Variable | Description | Example |
-|---|---|---|
-| `API_BASE_URL` | Backend API base path | `/api` |
-| `AUTH_BASE_URL` | Auth service base path | `/api/auth` |
-| `ENV` | Environment name | `dev`, `qa`, `prod` |
+| Variable        | Description            | Example             |
+| --------------- | ---------------------- | ------------------- |
+| `API_BASE_URL`  | Backend API base path  | `/api`              |
+| `AUTH_BASE_URL` | Auth service base path | `/api/auth`         |
+| `ENV`           | Environment name       | `dev`, `qa`, `prod` |
 
 These are injected via the `configmap:` section in `zen-gitops/envs/<env>/values-pharma-ui.yaml` and mounted as a ConfigMap in Kubernetes.
 
@@ -132,14 +134,14 @@ See [`zen-infra/docs/CICD-IMPLEMENTATION.md`](https://github.com/your-github-use
 
 Set in **Settings → Secrets and variables → Actions**:
 
-| Secret | Description |
-|---|---|
-| `AWS_ACCOUNT_ID` | 12-digit AWS account ID |
-| `GITOPS_TOKEN` | GitHub PAT with `contents: write` on `your-github-username/zen-gitops` |
-| `SEMGREP_APP_TOKEN` | Semgrep Cloud token (optional) |
+| Secret              | Description                                                            |
+| ------------------- | ---------------------------------------------------------------------- |
+| `AWS_ACCOUNT_ID`    | 12-digit AWS account ID                                                |
+| `GITOPS_TOKEN`      | GitHub PAT with `contents: write` on `your-github-username/zen-gitops` |
+| `SEMGREP_APP_TOKEN` | Semgrep Cloud token (optional)                                         |
 
-| Variable | Value |
-|---|---|
+| Variable      | Value                             |
+| ------------- | --------------------------------- |
 | `GITOPS_REPO` | `your-github-username/zen-gitops` |
 
 ---
