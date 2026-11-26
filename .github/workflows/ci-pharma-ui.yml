@@ -116,8 +116,6 @@ jobs:
     needs: [test, sonar]
     steps:
       - uses: actions/checkout@v5
-        with:
-          ref: ${{ inputs.ref || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -147,8 +145,6 @@ jobs:
       image_tag: ${{ steps.tag.outputs.image_tag }}
     steps:
       - uses: actions/checkout@v5
-        with:
-          ref: ${{ inputs.ref || github.sha }}
 
       - name: Set short image tag
         id: tag
@@ -189,7 +185,6 @@ jobs:
     name: Deploy — DEV
     needs: docker-build-push
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/develop') || github.event_name == 'workflow_dispatch'
     environment: dev
     steps:
       - uses: actions/checkout@v5
